@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('slides', function (Blueprint $table) {
             $table->id();
             $table->foreignId('presentation_id')->constrained();
-            $table->string('file');
+            $table->string('file')->nullable();
             $table->string('file_type')->default("imagen");
-            $table->string('question');
-            $table->string('question_type')->default("Unica");
+            $table->string('question')->nullable();
+            $table->string('question_type')->default("opcion unica");
             $table->string('status')->default("inicial");
             $table->timestamps();
             $table->softDeletes();

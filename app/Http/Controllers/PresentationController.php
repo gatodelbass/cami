@@ -72,4 +72,32 @@ class PresentationController extends Controller
 
         return back();
     }
+
+     public function create()
+    {
+        
+        return Inertia::render('Presentation/Create');
+    }
+
+    public function store(PresentationRequest $request)
+    {
+       
+
+        $presentation = Presentation::create($request->validated());
+
+
+        return Redirect::route('presentations.index');
+    }
+
+
+
+
+     public function camping()
+    {
+       
+
+        return Inertia::render('CampingIndex', [
+           
+        ]);
+    }
 }
