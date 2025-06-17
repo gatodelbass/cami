@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+Route::get('/prueba', function () {
+    return "la prueba";
+})->name('prueba');
+
 Route::get('/', function () {
     return Inertia::render('Welcome');
 })->name('home');
@@ -19,7 +23,7 @@ Route::middleware('auth')->group(function () {
 
 
 
-    Route::resource('slides', App\Http\Controllers\SlideController::class);
+    //Route::resource('slides', App\Http\Controllers\SlideController::class);
 
     Route::get('slides.create/{presentationId}', [App\Http\Controllers\SlideController::class, 'create'])->name('slides.create');    
 
