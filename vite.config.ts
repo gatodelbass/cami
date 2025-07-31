@@ -6,6 +6,12 @@ import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
+    server: {
+        cors: {
+          origin: 'http://cami.local',
+          credentials: true,
+        }
+      },
     plugins: [
         laravel({
             input: ['resources/js/app.ts'],

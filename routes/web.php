@@ -20,12 +20,16 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('presentations', App\Http\Controllers\PresentationController::class);
     Route::get('getslides/{presentationId}', [App\Http\Controllers\SlideController::class, 'getslides'])->name('getslides');
+    
 
 
 
     //Route::resource('slides', App\Http\Controllers\SlideController::class);
 
     Route::get('slides.create/{presentationId}', [App\Http\Controllers\SlideController::class, 'create'])->name('slides.create');    
+    Route::get('slides.index', [App\Http\Controllers\SlideController::class, 'index'])->name('slides.index');    
+    Route::post('slides.store', [App\Http\Controllers\SlideController::class, 'store'])->name('slides.store');    
+    Route::get('slides.edit/{slideId}', [App\Http\Controllers\SlideController::class, 'edit'])->name('slides.edit');    
 
 
     Route::get('camping', [App\Http\Controllers\PresentationController::class, 'camping'])->name('camping');

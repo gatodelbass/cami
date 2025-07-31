@@ -26,7 +26,7 @@ class SlideController extends Controller
     public function index()
     {
         return Inertia::render('Slide/Index', [
-            'presentations' => Slide::all()
+            'slides' => Slide::all()
         ]);
     }
 
