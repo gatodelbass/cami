@@ -15,6 +15,7 @@
                     <thead class="bg-gray-50 text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="px-6 py-3">ID</th>
+                            <th scope="col" class="px-6 py-3">titulo</th>
                             <th scope="col" class="px-6 py-3">Pregunta</th>
                             <th scope="col" class="px-6 py-3">Tipo</th>
                             <th scope="col" class="px-6 py-3">opciones</th>
@@ -25,6 +26,9 @@
                             <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                                 {{ slide.id }}
                             </th>
+                            <td class="px-6 py-4">
+                                {{ slide.title }}
+                            </td>
                             <td class="px-6 py-4">
                                 {{ slide.question }}
                             </td>

@@ -60,17 +60,14 @@ class PresentationController extends Controller
         return back();
     }
 
-    public function editPresentation(Request $request)
+    public function edit($presentationId)
     {
 
-        $tagExists = Presentation::where("name", $request->oldName)->first();
+        $presentation = Presentation::find($presentationId);
 
-        if ($tagExists) {
-            $tagExists->name = $request->name;
-            $tagExists->save();
-        }
-
-        return back();
+        return Inertia::render('Presentation/Edit', [
+            'presentation' => $presentation
+        ]);
     }
 
      public function create()
@@ -89,15 +86,17 @@ class PresentationController extends Controller
         return Redirect::route('presentations.index');
     }
 
-
-
-
-     public function camping()
+    public function update(PresentationRequest $request)
     {
-       
 
-        return Inertia::render('CampingIndex', [
-           
-        ]);
+       // dd($request);
+
+       $presentation = Presentation::find($request->id);
+        $presentation->title = $request->title;
+        $presentation->save();
+
+        
+        return Redirect::route('presentations.index');
     }
+
 }

@@ -41,7 +41,7 @@ class SlideController extends Controller
         ]);
     }
 
-     public function getslides($presentationId)
+    public function getslides($presentationId)
     {
 
         $slides = Slide::where("presentation_id", $presentationId)->get();
@@ -72,32 +72,28 @@ class SlideController extends Controller
         return back();
     }
 
-    public function editSlide(Request $request)
+    public function edit($slideId)
     {
 
-        $tagExists = Slide::where("name", $request->oldName)->first();
+        $slide = Slide::find($slideId);
 
-        if ($tagExists) {
-            $tagExists->name = $request->name;
-            $tagExists->save();
-        }
-
-        return back();
+        return Inertia::render('Slide/Edit', [
+            'slide' => $slide
+        ]);
     }
 
-     public function create($presentationId)
+    public function create($presentationId)
     {
-        
-        return Inertia::render('Slide/Create', [           
+
+        return Inertia::render('Slide/Create', [
             'presentation' => $presentationId
         ]);
-        
-      
     }
 
     public function store(SlideRequest $request)
     {
-       
+
+
         $slide = Slide::create($request->validated());
 
         if ($request->file != null) {
@@ -106,6 +102,31 @@ class SlideController extends Controller
             $slide->save();
         }
 
-        return Redirect::route('slides.index');
+        // dd($slide->presentation_id);
+
+        return redirect()->route('getslides', $slide->presentation_id);
+    }
+
+
+
+    public function update(SlideRequest $request)
+    {
+        $validatedData = $request->validated();
+        $slide = Slide::find($request->id);
+        $slide->title = $request->title;
+        $slide->file_type = $request->file_type;
+        $slide->question = $request->question;
+        $slide->question_type = $request->question_type;
+        $slide->save();
+
+
+
+        if ($request->file != null) {
+            $path = Storage::disk('public')->put('slides', $request->file);
+            $slide->file = $path;
+            $slide->save();
+        }
+
+        return redirect()->route('getslides', $slide->presentation_id);
     }
 }

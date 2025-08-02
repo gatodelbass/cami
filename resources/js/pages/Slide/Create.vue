@@ -48,7 +48,9 @@
 
                 <div class="mt-4 mb-6 grid gap-6 md:grid-cols-2">
                     <div>
-                        <label for="first_name" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Tipo de archivo multimedia</label>
+                        <label for="first_name" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                            >Tipo de archivo multimedia</label
+                        >
 
                         <select
                             v-model="form.file_type"
@@ -70,14 +72,14 @@
                             required
                         >
                             <option value="sin pregunta">sin pregunta</option>
-                        <option value="opcion unica">opcion unica</option>
+                            <option value="opcion unica">opcion unica</option>
                             <option value="opcion multiple">opcion multiple</option>
                             <option value="opcion unica imagen">opcion unica imagen</option>
                         </select>
                     </div>
                 </div>
 
-                 <div class="mt-4 mb-6 w-full">
+                <div class="mt-4 mb-6 w-full">
                     <div>
                         <label for="first_name" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Pregunta</label>
                         <input
@@ -89,10 +91,9 @@
                             required
                         />
                     </div>
-                   
                 </div>
 
-                <button @click="save()" class="rounded-sm border-2 border-teal-400 bg-teal-300 px-2 py-1">Crear presentacion</button>
+                <button @click="save()" class="rounded-sm border-2 border-teal-400 bg-teal-300 px-2 py-1">Crear diapositiva</button>
             </div>
         </div>
     </AppLayout>
@@ -115,16 +116,14 @@ export default {
             type: Object,
             default: {},
         },
-         presentation: {
+        presentation: {
             type: Number,
             default: {},
         },
     },
 
     setup(props, { emit }) {
-        const state = reactive({
-          
-        });
+        const state = reactive({});
 
         const form = useForm({
             presentation_id: props.presentation,

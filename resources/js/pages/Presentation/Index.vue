@@ -39,6 +39,12 @@
                                 >
                                     diapositivas
                                 </inertia-link>
+                                <inertia-link
+                                    :href="route('presentation.edit', presentation.id)"
+                                    class="mx-1 rounded border-1 border-gray-400 bg-gray-200 px-1 py-0"
+                                >
+                                    editar
+                                </inertia-link>
 
                             </td>
                         </tr>

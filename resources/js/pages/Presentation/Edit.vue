@@ -1,226 +1,47 @@
 <template>
-    <app-layout> </app-layout>
-    <div class="max-w-4xl mx-auto mt-4 text-jost text-sm md:text-base">
-        <div class="py-3 mx-auto sm:px-6 lg:px-8">
-            <div class="bg-emerald-300">
-                <div
-                    class="flex justify-between items-start p-5 rounded-t border-b"
-                >
-                    <h3
-                        class="text-3xl font-semibold text-gray-900 lg:text-4xl"
-                    >
-                        Edit this card
-                    </h3>
+    <Head title="Dashboard" />
+
+    <AppLayout>
+        <div class="">
+            <div class="p-5">
+                <div class="my-2 text-2xl font-bold">Indice de presentaciones</div>
+                <div class="my-2">
+                     <Link               
+                :href="route('presentations.index')"
+                class="border-2 border-teal-400 px-2 py-1 bg-teal-300 rounded-sm "
+            >
+                Volver
+            </Link>
                 </div>
-            </div>
 
-            <div class="mx-auto mt-0 bg-gray-50">
-                <div class="py-3 mx-auto sm:px-6 lg:px-8">
-                    <div class="flex flex-wrap">
-                        <div class="w-full md:w-1/3 mb-4 px-2">
-                            <jet-label for="name"
-                                >Card name (max 20):
-                            </jet-label>
-                            <jet-input
-                                id="other_position"
-                                type="text"
-                                class="mt-1 block w-full"
-                                v-model="form.name"
-                            />
-                            <jet-input-error
-                                :message="form.errors.name"
-                                class="mt-2"
-                            />
-                        </div>
+                
 
-                        <div class="w-full md:w-1/3 mb-4 px-2">
-                            <jet-label for="name">Layout: </jet-label>
-                            <jet-select
-                                v-model="form.layout"
-                                v-model:options="state.layouts"
-                                :value="form.layout"
-                                class="mt-1 block w-full"
-                                required
-                            />
-                            <jet-input-error
-                                :message="form.errors.layout"
-                                class="mt-2"
-                            />
-                        </div>
 
-                        <div class="w-full md:w-1/3 mb-4 px-2">
-                            <jet-label for="name">Image: </jet-label>
-                            <div
-                                class="flex items-center justify-center w-full mt-1"
+    <div class="grid gap-6 mb-6 md:grid-cols-2 mt-4">
+        <div>
+            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Titulo de la presentacion</label>
+            <input v-model="form.title" type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Titulo" required />
+        </div>
+     </div>  
+      <button
+                                @click="update()"
+                                class="border-2 border-teal-400 px-2 py-1 bg-teal-300 rounded-sm "
                             >
-                                <label
-                                    class="flex flex-col border-4 border-dashed w-full hover:bg-sky-200 hover:border-sky-300 group"
-                                >
-                                    <div
-                                        class="flex items-center justify-center"
-                                    >
-                                        <img
-                                            :src="'/icons/imageIcon.svg'"
-                                            class="w-8 rounded px-0 mx-2"
-                                        />
+                                Editar presentacion
+                            </button>
+    
 
-                                        <p
-                                            class="lowercase text-sm text-gray-400 group-hover:text-gray-600 pt-1 tracking-wider inline-block"
-                                        >
-                                            (400px x 600px)
-                                        </p>
-                                    </div>
-                                    <input
-                                        type="file"
-                                        class="hidden"
-                                        @change="onFileSelected"
-                                    />
-                                </label>
-                            </div>
 
-                            <jet-input-error
-                                :message="form.errors.layout"
-                                class="mt-2"
-                            />
-                        </div>
 
-                        <div class="w-full mb-4 px-2">
-                            <jet-label for="criteria"
-                                >Description text for your collection (max 200):
-                            </jet-label>
-                            <jet-text-area
-                                v-model="form.text"
-                                type="text"
-                                class="mt-1 block w-full text-sm md:text-base"
-                            />
-                            <jet-input-error
-                                :message="form.errors.criteria"
-                                class="mt-2"
-                            />
-                        </div>
-                    </div>
-
-                    <div class="flex flex-wrap justify-center">
-                        <card-big :card="state.card"> </card-big>
-                    </div>
-
-                    <div class="flex flex-wrap justify-center">
-                        <p class="w-full">Top filters</p>
-
-                        <button
-                            @click="setFilter('top', 'none', state.card)"
-                            class="inline-block align-middle w-10 m-1 bg-gray-100 border-1 border-gray-400"
-                        ></button>
-
-                        <img
-                            v-for="filter in topFilters"
-                            :key="filter"
-                            @click="setFilter('top', filter, state.card)"
-                            :src="'/filters/' + filter"
-                            class="inline-block align-middle w-10 m-1 cursor-pointer border-1 border-gray-400"
-                        />
-                    </div>
-
-                    <div class="flex flex-wrap justify-center">
-                        <p class="w-full">Bottom filters</p>
-
-                        <button
-                            @click="setFilter('bottom', 'none', state.card)"
-                            class="inline-block align-middle w-10 m-1 bg-gray-100 border-1 border-gray-400"
-                        ></button>
-
-                        <img
-                            v-for="filter in bottomFilters"
-                            :key="filter"
-                            @click="setFilter('bottom', filter, state.card)"
-                            :src="'/filters/' + filter"
-                            class="inline-block align-middle w-10 m-1 cursor-pointer border-1 border-gray-400"
-                        />
-                    </div>
-
-                    <!--
-                    <div>
-                        <img
-                            :src="'/storage/' + form.currentImage"
-                            class="z-0 border-white border-8"
-                        />
-                    </div>
-
-                    -->
-
-                    <div
-                        v-if="form.image"
-                        class="w-64 mx-auto bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 p-2"
-                    >
-                        <div class="w-full m-auto p-2 bg-red-400 rounded-t">
-                            <img
-                                class="inline-block align-middle w-10 m-1 cursor-pointer"
-                                :src="'/icons/starHueso.svg'"
-                            />
-                            <p class="inline-block">here goes the rarity</p>
-                            <img
-                                class="inline-block align-middle w-10 m-1 cursor-pointer"
-                                :src="'/icons/starHueso.svg'"
-                            />
-                        </div>
-
-                        <div class="w-full m-auto p-2">
-                            <div class="relative h-80">
-                                <img
-                                    :src="showImage(form.image)"
-                                    class="z-0 absolute border-white border-8"
-                                />
-                            </div>
-                        </div>
-
-                        <div
-                            class="bg-gradient-to-r from-cyan-900 via-cyan-800 to-cyan-500 rounded-sm align-middle text-center p-2 w-full text-cyan-200 mt-2"
-                        >
-                            <p class="text-rye">{{ form.name }}</p>
-                        </div>
-
-                        <div
-                            class="align-middle text-center text-cyan-200 mt-1"
-                        >
-                            <img
-                                :src="'/icons/coinCyan.svg'"
-                                class="w-4 inline-block"
-                            />
-                            <p
-                                class="inline-block ml-1 align-middle text-lobster"
-                            >
-                                0
-                            </p>
-                        </div>
-                    </div>
-
-                    <div
-                        class="flex items-center justify-center px-0 my-4 md:gap-8 gap-4 text-white text-lg"
-                    >
-                        <Link
-                            :href="route('collections.index')"
-                            class="w-auto bg-orange-500 hover:bg-orange-600 rounded-sm shadow-xl px-4 py-2"
-                        >
-                            Go back
-                        </Link>
-
-                        <button
-                            @click="edit()"
-                            class="w-auto bg-sky-500 hover:bg-sky-600 rounded-sm shadow-xl px-4 py-2 text-josefin"
-                        >
-                            Edit
-                        </button>
-                    </div>
-                </div>
             </div>
         </div>
-    </div>
+    </AppLayout>
 </template>
 
 <script>
 import { useForm } from "@inertiajs/vue3";
 import { reactive, onMounted } from "vue";
-import AppLayout from "@/Layouts/AppLayout.vue";
+import AppLayout from '@/layouts/AppLayout.vue';
 import JetInput from "@/Jetstream/Input.vue";
 import JetInputError from "@/Jetstream/InputError.vue";
 import JetLabel from "@/Jetstream/Label.vue";
@@ -228,7 +49,7 @@ import JetSelect from "@/Jetstream/Select.vue";
 import JetTextArea from "@/Jetstream/Textarea.vue";
 import Swal from "sweetalert2";
 import { usePage } from '@inertiajs/vue3'
-import CardBig from "../Card/CardBig.vue";
+
 
 export default {
     name: "OperatorCreate",
@@ -239,10 +60,10 @@ export default {
         JetLabel,
         JetSelect,
         JetTextArea,
-        CardBig,
+        
     },
     props: {
-        card: {
+        presentation: {
             type: Object,
             default: null,
         },
@@ -258,7 +79,7 @@ export default {
 
     setup(props, { emit }) {
         const state = reactive({
-            card: props.card,
+            presentation: props.presentation,
             layouts: {
                 Vertical: "Vertical",
                 Horizontal: "Horizontal",
@@ -267,27 +88,18 @@ export default {
 
         onMounted(() => {
             form.reset();
-            form.name = props.card.name;
-            form.layout = props.card.layout;
-            form.text = props.card.text;
-            form.currentImage = props.card.image;
-            form.collection_id = props.card.collection_id;
-            form.status = props.card.status;
+            form.id = props.presentation.id;
+            form.title = props.presentation.title;
+           
         });
 
         const form = useForm({
-            name: null,
-            layout: null,
-            text: null,
-            currentImage: null,
-            image: null,
-            collection_id: props.collectionId,
-            status: "created",
-            _method: "PUT",
+            id: null,
+            title: null,           
         });
 
-        function edit() {
-            form.post(route("cards.update", props.card.id), {
+        function update() {
+            form.put(route("presentations.update", props.presentation.id), {
                 onSuccess: () => {
                     Swal.fire({
                         toast: true,
@@ -315,45 +127,13 @@ export default {
             });
         }
 
-        function onFileSelected(event) {
-            form.image = event.target.files[0];
-        }
-
-        function showImage(image) {
-            return URL.createObjectURL(image);
-        }
-
-        async function setFilter(type, filter, card) {
-            await axios
-                .get(route("setFilter", [type, filter, card.id]))
-                .then(function (response) {
-                    if (type == "top") {
-                        state.card.top_filter = filter;
-                    } else {
-                        state.card.bottom_filter = filter;
-                    }
-
-                    Swal.fire({
-                        toast: true,
-                        title: '<p class="text-xl text-blueGray-300">Done!</p>',
-                        showClass: { popup: "" },
-                        position: "top-end",
-                        showConfirmButton: false,
-                        icon: "success",
-                        background: "#334155",
-                        timer: 1500,
-                    });
-                })
-                .catch(function (error) {});
-        }
+      
 
         return {
-            edit,
+            update,
             form,
             state,
-            showImage,
-            onFileSelected,
-            setFilter,
+            
         };
     },
 };

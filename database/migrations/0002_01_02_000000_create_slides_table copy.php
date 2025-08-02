@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('slides', function (Blueprint $table) {
             $table->id();
             $table->foreignId('presentation_id')->constrained();
+            $table->string('title');
             $table->string('file')->nullable();
             $table->string('file_type')->default("imagen");
             $table->string('question')->nullable();
