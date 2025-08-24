@@ -34,6 +34,13 @@ Route::middleware('auth')->group(function () {
     Route::put('slides.update', [App\Http\Controllers\SlideController::class, 'update'])->name('slides.update');    
 
 
+    Route::get('getanswers/{presentationId}', [App\Http\Controllers\AnswerController::class, 'getanswers'])->name('getanswers');
+    
+     Route::get('answers.create/{presentationId}', [App\Http\Controllers\AnswerController::class, 'create'])->name('answers.create');    
+    Route::get('answers.index', [App\Http\Controllers\AnswerController::class, 'index'])->name('answers.index');    
+    Route::post('answers.store', [App\Http\Controllers\AnswerController::class, 'store'])->name('answers.store');    
+    Route::get('answers.edit/{answerId}', [App\Http\Controllers\AnswerController::class, 'edit'])->name('answers.edit');    
+    Route::put('answers.update', [App\Http\Controllers\AnswerController::class, 'update'])->name('answers.update');  
 
 
 

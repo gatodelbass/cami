@@ -4,10 +4,10 @@
     <AppLayout>
         <div class="">
             <div class="p-5">
-                <div class="my-2 text-2xl font-bold">Indice de diapositivas</div>
+                <div class="my-2 text-2xl font-bold">Indice de respuestas</div>
                 <div class="my-2">
-                    <InertiaLink :href="route('slides.create', presentation)" class="rounded-sm border-2 border-teal-400 bg-teal-300 px-2 py-1">
-                        Nueva diapositiva
+                    <InertiaLink :href="route('answers.create', presentation)" class="rounded-sm border-2 border-teal-400 bg-teal-300 px-2 py-1">
+                        Nueva respuesta
                     </InertiaLink>
                 </div>
 
@@ -15,50 +15,35 @@
                     <thead class="bg-gray-50 text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="px-6 py-3">ID</th>
-                            <th scope="col" class="px-6 py-3"></th>
-                            <th scope="col" class="px-6 py-3">titulo</th>
-                            <th scope="col" class="px-6 py-3">Pregunta</th>
-                            <th scope="col" class="px-6 py-3">Tipo</th>
+                            <th scope="col" class="px-6 py-3">imagen</th>
+                            <th scope="col" class="px-6 py-3">respuesta</th>
+                            <th scope="col" class="px-6 py-3">correcta</th>
                             <th scope="col" class="px-6 py-3">opciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="slide in slides" :key="slide.id" class="border-1 border-gray-200 bg-white">
+                        <tr v-for="answer in answers" :key="answer.id" class="border-1 border-gray-200 bg-white">
                             <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-gray-900 dark:text-white">
-                                {{ slide.id }}
+                                {{ answer.id }}
                             </th>
-                          
-                    <td class="px-6 py-2">
-                        <img
-                        class="w-24 object-contain rounded-sm inline-block mx-2"
-                        alt="img"
-                         :src="'/storage/' + slide.file"
-                       
-                    />
+
+                            <td class="px-6 py-2">
+                                <img class="mx-2 inline-block w-24 rounded-sm object-contain" alt="img" :src="'/storage/' + answer.image" />
                             </td>
                             <td class="px-6 py-4">
-                                {{ slide.title }}
+                                {{ answer.answer }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ slide.question }}
+                                {{ answer.correct }}
                             </td>
+
                             <td class="px-6 py-4">
-                                {{ slide.question_type }}
-                            </td>
-                            <td class="px-6 py-4">
-                                  <inertia-link
-                                    :href="route('slides.edit', slide.id)"
+                                <inertia-link
+                                    :href="route('answers.edit', answer.id)"
                                     class="mx-1 rounded border-1 border-gray-400 bg-gray-200 px-1 py-0"
                                 >
                                     editar
                                 </inertia-link>
-                                <inertia-link
-                                    :href="route('getanswers', slide.id)"
-                                    class="mx-1 rounded border-1 border-gray-400 bg-gray-200 px-1 py-0"
-                                >
-                                    respuestas
-                                </inertia-link>
-                              
                             </td>
                         </tr>
                     </tbody>
@@ -78,7 +63,7 @@ export default {
         AppLayout,
     },
     props: {
-        slides: {
+        answers: {
             type: Object,
             default: {},
         },
