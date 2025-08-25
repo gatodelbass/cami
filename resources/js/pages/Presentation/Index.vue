@@ -45,6 +45,12 @@
                                 >
                                     editar
                                 </inertia-link>
+                                 <inertia-link
+                                    :href="route('play', presentation.id)"
+                                    class="mx-1 rounded border-1 border-gray-400 bg-gray-200 px-1 py-0"
+                                >
+                                    play
+                                </inertia-link>
 
                             </td>
                         </tr>

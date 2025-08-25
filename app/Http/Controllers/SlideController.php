@@ -129,4 +129,7 @@ class SlideController extends Controller
 
         return redirect()->route('getslides', $slide->presentation_id);
     }
+
+
+   
 }

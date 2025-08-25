@@ -64,7 +64,7 @@
                     </div>
                 </div>
 
-                <button @click="save()" class="rounded-sm border-2 border-teal-400 bg-teal-300 px-2 py-1">Crear diapositiva</button>
+                <button @click="save()" class="rounded-sm border-2 border-teal-400 bg-teal-300 px-2 py-1">Agregar respuesta</button>
             </div>
         </div>
     </AppLayout>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Presentation;
+use App\Models\Slide;
+use App\Models\Answer;
 
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\PresentationRequest;
@@ -97,6 +99,22 @@ class PresentationController extends Controller
 
         
         return Redirect::route('presentations.index');
+    }
+
+
+     public function play($presentationId){
+        
+
+        $presentation = Presentation::find($presentationId);
+        $slides = Slide::where("presentation_id" , $presentationId)->get();
+
+       // dd($slides);
+
+          return Inertia::render('Presentation/Play', [
+            'presentation' => $presentation,
+            'slides' => $slides->load(['slideAnswers']),
+        ]);
+
     }
 
 }

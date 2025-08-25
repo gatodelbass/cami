@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('presentations', App\Http\Controllers\PresentationController::class);
     Route::get('getslides/{presentationId}', [App\Http\Controllers\SlideController::class, 'getslides'])->name('getslides');
     Route::get('presentation.edit/{presentationId}', [App\Http\Controllers\PresentationController::class, 'edit'])->name('presentation.edit');
+    Route::get('play/{presentationId}', [App\Http\Controllers\PresentationController::class, 'play'])->name('play');
     
 
 

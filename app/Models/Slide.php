@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Collection;
+use App\Models\Answer;
 
 
 class Slide extends Model
@@ -18,6 +19,11 @@ class Slide extends Model
     public function presentation()
     {
         return $this->belongsTo(Presentation::class);
+    }
+
+    public function slideAnswers()
+    {
+        return $this->hasMany(Answer::class);
     }
 
    
