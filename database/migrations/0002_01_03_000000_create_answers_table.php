@@ -16,7 +16,8 @@ return new class extends Migration
             $table->foreignId('slide_id')->constrained();           
             $table->string('correct')->default("NO");
             $table->string('answer');
-            $table->string('image')->nullable();           
+            $table->string('image')->nullable();       
+            $table->integer('order')->default(0);    
             $table->timestamps();
             $table->softDeletes();
         });

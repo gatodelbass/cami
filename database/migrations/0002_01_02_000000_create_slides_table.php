@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('question')->nullable();
             $table->string('question_type')->default("opcion unica");
             $table->string('status')->default("inicial");
+            $table->integer('order')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

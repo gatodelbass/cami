@@ -24,6 +24,8 @@ Route::middleware('auth')->group(function () {
     Route::get('play/{presentationId}', [App\Http\Controllers\PresentationController::class, 'play'])->name('play');
     
 
+    Route::post('saveSlideOrder', [App\Http\Controllers\SlideController::class, 'saveSlideOrder'])->name('saveSlideOrder');
+
 
 
     //Route::resource('slides', App\Http\Controllers\SlideController::class);

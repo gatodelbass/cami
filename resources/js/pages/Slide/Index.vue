@@ -27,14 +27,9 @@
                             <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                                 {{ slide.id }}
                             </th>
-                          
-                    <td class="px-6 py-2">
-                        <img
-                        class="w-24 object-contain rounded-sm inline-block mx-2"
-                        alt="img"
-                         :src="'/storage/' + slide.file"
-                       
-                    />
+
+                            <td class="px-6 py-2">
+                                <img class="mx-2 inline-block w-24 rounded-sm object-contain" alt="img" :src="'/storage/' + slide.file" />
                             </td>
                             <td class="px-6 py-4">
                                 {{ slide.title }}
@@ -46,7 +41,7 @@
                                 {{ slide.question_type }}
                             </td>
                             <td class="px-6 py-4">
-                                  <inertia-link
+                                <inertia-link
                                     :href="route('slides.edit', slide.id)"
                                     class="mx-1 rounded border-1 border-gray-400 bg-gray-200 px-1 py-0"
                                 >
@@ -58,24 +53,43 @@
                                 >
                                     respuestas
                                 </inertia-link>
-                              
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+
+        <draggable :list="state.slides" @change="saveSlideOrder(state.slides)">
+            <template #item="{ element: slide }">
+                <div class="mx-auto max-w-5xl cursor-move">
+                    <div class="border-1 border-gray-600 bg-yellow-50">
+                        <span>ID{{ slide.id }}</span>
+                        <span>orden{{ slide.order }}</span>
+                        <img class="mx-2 inline-block w-24 rounded-sm object-contain" alt="img" :src="'/storage/' + slide.file" />
+                        <p>{{ slide.title }}</p>
+
+                        <p>{{ slide.title }}</p>
+
+                        <p>{{ slide.title }}</p>
+                    </div>
+                </div>
+            </template>
+        </draggable>
     </AppLayout>
 </template>
 
 <script>
 import AppLayout from '@/layouts/AppLayout.vue';
+import { useForm } from '@inertiajs/vue3';
+import draggable from 'vuedraggable';
 
-import { reactive } from 'vue';
+import { onMounted, reactive } from 'vue';
 export default {
     name: 'CardShow',
     components: {
         AppLayout,
+        draggable,
     },
     props: {
         slides: {
@@ -89,12 +103,38 @@ export default {
     },
 
     setup(props, { emit }) {
+        onMounted(() => {
+            props.slides.forEach((element) => {
+                let slide = {
+                    id: element.id,
+                    presentation_id: element.presentation_id,
+                    title: element.title,
+                    file: element.file,
+                    order: element.order,
+                    question: element.question,
+                };
+                state.slides.push(slide);
+            });
+        });
+
+        const form = useForm({
+            presentation_id: props.presentation,
+            slides: null,
+        });
+
         const state = reactive({
             edad: 10,
+            slides: [],
         });
+
+        async function saveSlideOrder() {
+            form.slides = state.slides;
+            form.post(route('saveSlideOrder'), {});
+        }
 
         return {
             state,
+            saveSlideOrder,
         };
     },
 };

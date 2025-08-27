@@ -44,7 +44,7 @@ class SlideController extends Controller
     public function getslides($presentationId)
     {
 
-        $slides = Slide::where("presentation_id", $presentationId)->get();
+        $slides = Slide::where("presentation_id", $presentationId)->orderBy('order')->get();
 
         return Inertia::render('Slide/Index', [
             'slides' => $slides,
@@ -128,6 +128,28 @@ class SlideController extends Controller
         }
 
         return redirect()->route('getslides', $slide->presentation_id);
+    }
+
+     public function saveSlideOrder(Request $request)
+    {
+
+       
+
+        $presentationId = $request->presentation_id;
+        $slides = $request->slides;
+
+        $order = 1;
+
+
+        foreach ($slides as $key => $slide) {
+            $slide = Slide::find($slide["id"]);
+            $slide->order = $order;
+            $slide->save();
+            $order++;
+        }
+
+
+        return redirect()->route('getslides', $presentationId);
     }
 
 
