@@ -138,11 +138,5 @@ class AnswerController extends Controller
             $answer->save();
             $order++;
         }
-      
-        $sortedAnswers = Answer::where("slide_id", $slideId)->orderBy('order')->get();
-
-      
-
-        return redirect()->route('getanswers', $slideId);
     }
 }

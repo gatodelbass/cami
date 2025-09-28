@@ -117,7 +117,7 @@ export default {
             slides: [],
         });
 
-        async function saveSlideOrder() {
+         function saveSlideOrder() {
             form.slides = state.slides;
             form.post(route('saveSlideOrder'), {});
             window.location.reload();

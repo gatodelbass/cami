@@ -109,10 +109,11 @@ export default {
             answers: [],
         });
 
-        async function saveAnswerOrder() {
+         function saveAnswerOrder() {
             form.answers = state.answers;
             form.post(route('saveAnswerOrder'), {});
-            window.location.reload();
+            setTimeout(1000) 
+            window.location.reload(true);
         }
 
         return {
