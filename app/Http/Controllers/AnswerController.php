@@ -26,7 +26,7 @@ class AnswerController extends Controller
     public function index()
     {
         return Inertia::render('Answer/Index', [
-            'Answers' => Answer::all()
+            'answers' => Answer::all()
         ]);
     }
 
@@ -41,14 +41,15 @@ class AnswerController extends Controller
         ]);
     }
 
-    public function getAnswers($slideId)
+    public function getanswers($slideId)
     {
+        //   dd($slideId);
 
-        $answers = Answer::where("slide_id", $slideId)->get();
+        $answers = Answer::where("slide_id", $slideId)->orderBy('order')->get();
 
         return Inertia::render('Answer/Index', [
             'answers' => $answers,
-            'presentation' => $slideId
+            'slide' => $slideId
         ]);
     }
 
@@ -123,5 +124,25 @@ class AnswerController extends Controller
         }
 
         return redirect()->route('getanswers', $answer->slide_id);
+    }
+
+    public function saveAnswerOrder(Request $request)
+    {    
+
+        $slideId = $request->slide_id;
+        $answers = $request->answers;
+        $order = 1;
+        foreach ($answers as $key => $answer) {
+            $answer = Answer::find($answer["id"]);
+            $answer->order = $order;
+            $answer->save();
+            $order++;
+        }
+      
+        $sortedAnswers = Answer::where("slide_id", $slideId)->orderBy('order')->get();
+
+      
+
+        return redirect()->route('getanswers', $slideId);
     }
 }

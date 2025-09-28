@@ -120,6 +120,7 @@ export default {
         async function saveSlideOrder() {
             form.slides = state.slides;
             form.post(route('saveSlideOrder'), {});
+            window.location.reload();
         }
 
         return {
