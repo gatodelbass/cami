@@ -72,15 +72,15 @@ class PresentationController extends Controller
         ]);
     }
 
-     public function create()
+    public function create()
     {
-        
+
         return Inertia::render('Presentation/Create');
     }
 
     public function store(PresentationRequest $request)
     {
-       
+
 
         $presentation = Presentation::create($request->validated());
 
@@ -91,30 +91,35 @@ class PresentationController extends Controller
     public function update(PresentationRequest $request)
     {
 
-       // dd($request);
+        // dd($request);
 
-       $presentation = Presentation::find($request->id);
+        $presentation = Presentation::find($request->id);
         $presentation->title = $request->title;
         $presentation->save();
 
-        
+
         return Redirect::route('presentations.index');
     }
 
 
-     public function play($presentationId){
-        
+    public function play($presentationId)
+    {
+
 
         $presentation = Presentation::find($presentationId);
-        $slides = Slide::where("presentation_id" , $presentationId)->get();
+        $slides = Slide::where("presentation_id", $presentationId)->orderBy("order")->get();
 
-       // dd($slides);
+        $slides = Slide::where("presentation_id", $presentationId)->orderBy("order")
+            ->with(['slideAnswers' => function ($query) {
+                $query->orderBy('order'); // Order posts by creation date, descending
+            }])->get();
 
-          return Inertia::render('Presentation/Play', [
+        // dd($slides);
+
+        return Inertia::render('Presentation/Play', [
             'presentation' => $presentation,
-            'slides' => $slides->load(['slideAnswers']),
+            //'slides' => $slides->load(['slideAnswers']),
+            'slides' => $slides,
         ]);
-
     }
-
 }

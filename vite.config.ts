@@ -8,7 +8,7 @@ import { defineConfig } from 'vite';
 export default defineConfig({
     server: {
         cors: {
-          origin: 'http://cami.local',
+          origin: true,
           credentials: true,
         }
       },

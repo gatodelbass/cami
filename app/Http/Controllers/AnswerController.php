@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Answer;
-
+use App\Models\Slide;
 
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\AnswerRequest;
@@ -43,13 +43,16 @@ class AnswerController extends Controller
 
     public function getanswers($slideId)
     {
-        //   dd($slideId);
+        
+
+        $slide = Slide::find($slideId);
+       
 
         $answers = Answer::where("slide_id", $slideId)->orderBy('order')->get();
 
         return Inertia::render('Answer/Index', [
             'answers' => $answers,
-            'slide' => $slideId
+            'slide' => $slide
         ]);
     }
 
@@ -127,7 +130,7 @@ class AnswerController extends Controller
     }
 
     public function saveAnswerOrder(Request $request)
-    {    
+    {
 
         $slideId = $request->slide_id;
         $answers = $request->answers;

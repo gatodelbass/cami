@@ -4,7 +4,7 @@
     <AppLayout>
         <div class="">
             <div class="p-5">
-                <div class="my-2 text-2xl font-bold">Indice de respuestas</div>
+                <div class="my-2 text-2xl font-bold">Indice de respuestas: {{ slide.question }}</div>
                 <div class="my-2">
                     <InertiaLink :href="route('answers.create', slide)" class="rounded-sm border-2 border-teal-400 bg-teal-300 px-2 py-1">
                         Nueva respuesta
@@ -79,7 +79,7 @@ export default {
             default: {},
         },
         slide: {
-            type: Number,
+            type: Object,
             default: {},
         },
     },
@@ -100,7 +100,7 @@ export default {
         });
 
         const form = useForm({
-            slide_id: props.slide,
+            slide_id: props.slide.id,
             answers: null,
         });
 
@@ -109,10 +109,10 @@ export default {
             answers: [],
         });
 
-         function saveAnswerOrder() {
+        function saveAnswerOrder() {
             form.answers = state.answers;
             form.post(route('saveAnswerOrder'), {});
-            setTimeout(1000) 
+            setTimeout(1000);
             window.location.reload(true);
         }
 
