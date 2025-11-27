@@ -105,6 +105,8 @@ class PresentationController extends Controller
     public function play($presentationId)
     {
         $presentation = Presentation::find($presentationId);
+        $totalSlides = Slide::where("presentation_id", $presentationId)->count();
+
 
         $slide = Slide::where("presentation_id", $presentationId)->orderBy("order")
             ->with(['slideAnswers' => function ($query) {
@@ -114,16 +116,33 @@ class PresentationController extends Controller
         return Inertia::render('Presentation/Play', [
             'presentation' => $presentation,
             'slide' => $slide,
+            'totalSlides' => $totalSlides,
         ]);
     }
 
-    public function changeSlide($currentSlideId)
+    public function nextSlide($currentSlideId)
     {
 
         $currentSlide = Slide::find($currentSlideId);
 
         $changeSlide = Slide::where("presentation_id", $currentSlide->presentation_id)
             ->where("order", $currentSlide->order + 1)
+            ->with(['slideAnswers' => function ($query) {
+                $query->orderBy('order'); // Order posts by creation date, descending
+            }])->first();
+
+        return response()->json([
+            'newSlide' => $changeSlide
+        ]);
+    }
+
+    public function previousSlide($currentSlideId)
+    {
+
+        $currentSlide = Slide::find($currentSlideId);
+
+        $changeSlide = Slide::where("presentation_id", $currentSlide->presentation_id)
+            ->where("order", $currentSlide->order - 1)
             ->with(['slideAnswers' => function ($query) {
                 $query->orderBy('order'); // Order posts by creation date, descending
             }])->first();

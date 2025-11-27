@@ -5,7 +5,8 @@ import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
+import { LayoutGrid } from 'lucide-vue-next';
+import { reactive } from 'vue';
 import AppLogo from './AppLogo.vue';
 
 const mainNavItems: NavItem[] = [
@@ -21,22 +22,24 @@ const mainNavItems: NavItem[] = [
     },
 ];
 
-const footerNavItems: NavItem[] = [
-    {
-        title: 'Github Repo',
-        href: 'https://github.com/laravel/vue-starter-kit',
-        icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits',
-        icon: BookOpen,
-    },
-];
+const footerNavItems: NavItem[] = [];
+
+const state = reactive({
+    ocultar: false,
+});
+
+function ocultarToggle() {
+    if (state.ocultar == true) {
+        state.ocultar = false;
+    } else {
+        state.ocultar = true;
+    }
+}
 </script>
 
 <template>
-    <Sidebar collapsible="icon" variant="inset">
+    <Sidebar v-if="state.ocultar == false" collapsible="icon" variant="inset">
+        <button @click="ocultarToggle()" class="h-8 w-16 border-1 border-gray-400 bg-teal-300 p-1">ocultar</button>
         <SidebarHeader>
             <SidebarMenu>
                 <SidebarMenuItem>
@@ -58,5 +61,7 @@ const footerNavItems: NavItem[] = [
             <NavUser />
         </SidebarFooter>
     </Sidebar>
+
+    <span v-if="state.ocultar == true" @click="ocultarToggle" class="h-8 w-10 border-1 border-gray-400 bg-teal-300 p-1">ver</span>
     <slot />
 </template>
