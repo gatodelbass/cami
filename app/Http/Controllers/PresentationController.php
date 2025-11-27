@@ -104,22 +104,32 @@ class PresentationController extends Controller
 
     public function play($presentationId)
     {
-
-
         $presentation = Presentation::find($presentationId);
-        $slides = Slide::where("presentation_id", $presentationId)->orderBy("order")->get();
 
-        $slides = Slide::where("presentation_id", $presentationId)->orderBy("order")
+        $slide = Slide::where("presentation_id", $presentationId)->orderBy("order")
             ->with(['slideAnswers' => function ($query) {
                 $query->orderBy('order'); // Order posts by creation date, descending
-            }])->get();
-
-        // dd($slides);
+            }])->first();
 
         return Inertia::render('Presentation/Play', [
             'presentation' => $presentation,
-            //'slides' => $slides->load(['slideAnswers']),
-            'slides' => $slides,
+            'slide' => $slide,
+        ]);
+    }
+
+    public function changeSlide($currentSlideId)
+    {
+
+        $currentSlide = Slide::find($currentSlideId);
+
+        $changeSlide = Slide::where("presentation_id", $currentSlide->presentation_id)
+            ->where("order", $currentSlide->order + 1)
+            ->with(['slideAnswers' => function ($query) {
+                $query->orderBy('order'); // Order posts by creation date, descending
+            }])->first();
+
+        return response()->json([
+            'newSlide' => $changeSlide
         ]);
     }
 }
