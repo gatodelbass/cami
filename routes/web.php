@@ -18,6 +18,8 @@ Route::get('dashboard', function () {
 
 Route::middleware('auth')->group(function () {
 
+     Route::get('playNow', [App\Http\Controllers\PlayController::class, 'playNow'])->name('playNow');
+
     Route::resource('presentations', App\Http\Controllers\PresentationController::class);
     Route::get('getslides/{presentationId}', [App\Http\Controllers\SlideController::class, 'getslides'])->name('getslides');
     Route::get('presentation.edit/{presentationId}', [App\Http\Controllers\PresentationController::class, 'edit'])->name('presentation.edit');

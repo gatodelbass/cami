@@ -20,6 +20,11 @@ const mainNavItems: NavItem[] = [
         href: '/presentations',
         icon: LayoutGrid,
     },
+    {
+        title: 'Play',
+        href: '/playNow',
+        icon: LayoutGrid,
+    },
 ];
 
 const footerNavItems: NavItem[] = [];

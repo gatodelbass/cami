@@ -1,0 +1,37 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Inertia\Inertia;
+use App\Models\Presentation;
+use App\Models\Slide;
+use App\Models\Answer;
+
+use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\PresentationRequest;
+use App\Models\Play;
+use Carbon;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
+
+
+class PlayController extends Controller
+{
+    function playNow()
+    {
+
+
+        $play = Play::first();
+        $slide = Slide::find($play->slide_id);
+        $answers = Answer::where("slide_id", $slide->id)->orderBy("order")->get();
+
+        return Inertia::render('Presentation/PlayNow', [
+
+            'play' => $play,
+            'answers' => $answers,
+            'slide' => $slide->load(["slideAnswers"]),
+
+        ]);
+    }
+}

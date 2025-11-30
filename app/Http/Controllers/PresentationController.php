@@ -10,8 +10,7 @@ use App\Models\Answer;
 
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\PresentationRequest;
-
-
+use App\Models\Play;
 use Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
@@ -104,6 +103,9 @@ class PresentationController extends Controller
 
     public function play($presentationId)
     {
+
+
+
         $presentation = Presentation::find($presentationId);
         $totalSlides = Slide::where("presentation_id", $presentationId)->count();
 
@@ -112,6 +114,20 @@ class PresentationController extends Controller
             ->with(['slideAnswers' => function ($query) {
                 $query->orderBy('order'); // Order posts by creation date, descending
             }])->first();
+
+        $deletePreviousPlay = Play::first();
+        //dd($deletePreviousPlay);
+        Log::debug("ok");
+        if ($deletePreviousPlay) {
+            Log::debug("borra");
+            $deletePreviousPlay->delete();
+        }
+
+
+        $play = new Play();
+        $play->presentation_id = $presentation->id;
+        $play->slide_id = $slide->id;
+        $play->save();
 
         return Inertia::render('Presentation/Play', [
             'presentation' => $presentation,
@@ -125,11 +141,17 @@ class PresentationController extends Controller
 
         $currentSlide = Slide::find($currentSlideId);
 
+
         $changeSlide = Slide::where("presentation_id", $currentSlide->presentation_id)
             ->where("order", $currentSlide->order + 1)
             ->with(['slideAnswers' => function ($query) {
                 $query->orderBy('order'); // Order posts by creation date, descending
             }])->first();
+
+        $play = Play::first();
+        $play->presentation_id = $changeSlide->presentation_id;
+        $play->slide_id = $changeSlide->id;
+        $play->save();
 
         return response()->json([
             'newSlide' => $changeSlide
@@ -141,11 +163,17 @@ class PresentationController extends Controller
 
         $currentSlide = Slide::find($currentSlideId);
 
+
         $changeSlide = Slide::where("presentation_id", $currentSlide->presentation_id)
             ->where("order", $currentSlide->order - 1)
             ->with(['slideAnswers' => function ($query) {
                 $query->orderBy('order'); // Order posts by creation date, descending
             }])->first();
+
+        $play = Play::first();
+        $play->presentation_id = $changeSlide->presentation_id;
+        $play->slide_id = $changeSlide->id;
+        $play->save();
 
         return response()->json([
             'newSlide' => $changeSlide
