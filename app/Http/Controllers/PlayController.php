@@ -24,14 +24,32 @@ class PlayController extends Controller
 
         $play = Play::first();
         $slide = Slide::find($play->slide_id);
+
         $answers = Answer::where("slide_id", $slide->id)->orderBy("order")->get();
 
         return Inertia::render('Presentation/PlayNow', [
 
             'play' => $play,
             'answers' => $answers,
-            'slide' => $slide->load(["slideAnswers"]),
+            'slide' => $slide,
 
+        ]);
+    }
+
+    public function updatePlaySlide()
+    {
+
+
+
+        $play = Play::first();
+
+        $slide = Slide::find($play->slide_id);
+
+        $answers = Answer::where("slide_id", $slide->id)->orderBy("order")->get();
+
+        return response()->json([
+            'answers' => $answers,
+            'slide' => $slide,
         ]);
     }
 }
