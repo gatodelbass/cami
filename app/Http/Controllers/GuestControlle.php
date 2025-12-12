@@ -16,9 +16,9 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 
 
-class PlayController extends Controller
+class GuestController extends Controller
 {
-    function playNow()
+    function playNowGuest()
     {
 
 
@@ -38,20 +38,9 @@ class PlayController extends Controller
 
     public function updatePlaySlide()
     {
-        $play = Play::first();
 
-        $slide = Slide::find($play->slide_id);
 
-        $answers = Answer::where("slide_id", $slide->id)->orderBy("order")->get();
 
-        return response()->json([
-            'answers' => $answers,
-            'slide' => $slide,
-        ]);
-    }
-
-     public function guestRefresh()
-    {
         $play = Play::first();
 
         $slide = Slide::find($play->slide_id);

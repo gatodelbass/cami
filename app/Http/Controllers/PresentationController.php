@@ -139,7 +139,11 @@ class PresentationController extends Controller
     public function nextSlide($currentSlideId)
     {
 
+        
+
         $currentSlide = Slide::find($currentSlideId);
+
+        //dd($currentSlide);
 
 
         $changeSlide = Slide::where("presentation_id", $currentSlide->presentation_id)
