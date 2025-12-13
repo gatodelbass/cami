@@ -11,9 +11,12 @@ use App\Models\Answer;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\PresentationRequest;
 use App\Models\Play;
+use App\Models\UserAnswer;
 use Carbon;
+
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 
 class PlayController extends Controller
@@ -62,5 +65,22 @@ class PlayController extends Controller
             'answers' => $answers,
             'slide' => $slide,
         ]);
+    }
+
+    public function guestSaveAnswer($answerId){
+
+        
+        $answer = Answer::find($answerId);
+        $slide = Slide::find($answer->slide_id);
+
+        $userAnswer = new UserAnswer();
+        $userAnswer->presentation_id = $slide->presentation_id;
+        $userAnswer->user_id = Auth::id();
+        $userAnswer->question = $slide->question;
+        $userAnswer->answer = $answer->answer;
+        $userAnswer->correct = $answer->correct;
+        $userAnswer->save();
+
+
     }
 }

@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
 
 
      Route::get('guestRefresh', [App\Http\Controllers\PlayController::class, 'guestRefresh'])->name('guestRefresh');
+  Route::get('guestSaveAnswer/{answerId}', [App\Http\Controllers\PlayController::class, 'guestSaveAnswer'])->name('guestSaveAnswer');
 
 
     Route::get('playNow', [App\Http\Controllers\PlayController::class, 'playNow'])->name('playNow');
