@@ -11,7 +11,9 @@
 
                     <div v-for="answer in state.answers" :key="answer.id" class="m-2 rounded-md border-1 border-gray-400 p-1">
                         <div @click="selectAnswer(answer.id)">
-                            <p v-if="state.selectedAnswer == answer.id" class="bg-gray-700 px-1 text-gray-100">{{ answer.order }} - {{ answer.answer }}</p>
+                            <p v-if="state.selectedAnswer == answer.id" class="bg-gray-700 px-1 text-gray-100">
+                                {{ answer.order }} - {{ answer.answer }}
+                            </p>
                             <p v-else class="bg-gray-50 px-1">{{ answer.order }} - {{ answer.answer }}</p>
                         </div>
                     </div>
@@ -21,8 +23,20 @@
 
                     <div class="flex flex-wrap justify-center">
                         <div v-for="answer in state.answers" :key="answer.id">
-                            <span class="inline rounded-sm border-1 border-gray-900 bg-gray-600 px-1 text-lg text-white">{{ answer.order }}</span>
-                            <img class="m-1 inline-block w-40 border-1 border-gray-600" alt="img" :src="'/storage/' + answer.image" />
+                            <div @click="selectAnswer(answer.id)">
+                                <div v-if="state.selectedAnswer == answer.id"   >
+                                    <span class="inline rounded-sm border-1 border-gray-900 bg-gray-600 px-1 text-lg text-white">{{
+                                        answer.order
+                                    }}</span>
+                                    <img class="m-1 inline-block w-40 border-gray-700 border-8 rounded-sm " alt="img" :src="'/storage/' + answer.image" />
+                                </div>
+                                <div v-else>
+                                    <span class="inline rounded-sm border-1 border-gray-900 bg-gray-600 px-1 text-lg text-white">{{
+                                        answer.order
+                                    }}</span>
+                                    <img class="m-1 inline-block w-40 border-8 border-gray-200 rounded-sm" alt="img" :src="'/storage/' + answer.image" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -68,8 +82,6 @@ export default {
             answers: null,
             selectedAnswer: null,
         });
-
-       
 
         async function guardarRespuesta() {
             state.slide = null;

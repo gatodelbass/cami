@@ -53,7 +53,7 @@ class PlayController extends Controller
         ]);
     }
 
-     public function guestRefresh()
+    public function guestRefresh()
     {
         $play = Play::first();
 
@@ -67,20 +67,33 @@ class PlayController extends Controller
         ]);
     }
 
-    public function guestSaveAnswer($answerId){
-
-        
+    public function guestSaveAnswer($answerId)
+    {
         $answer = Answer::find($answerId);
         $slide = Slide::find($answer->slide_id);
+        $play = Play::first();
 
-        $userAnswer = new UserAnswer();
-        $userAnswer->presentation_id = $slide->presentation_id;
-        $userAnswer->user_id = Auth::id();
-        $userAnswer->question = $slide->question;
-        $userAnswer->answer = $answer->answer;
-        $userAnswer->correct = $answer->correct;
-        $userAnswer->save();
+        $previousUserAnswer = UserAnswer::where("presentation_id", $slide->presentation_id)
+            ->where("user_id", Auth::id())
+            ->where("play_id", $play->id)->first();
+
+        if ($previousUserAnswer) {
 
 
+
+            $previousUserAnswer->answer = $answer->answer;
+            $previousUserAnswer->correct = $answer->correct;
+            $previousUserAnswer->save();
+        } else {
+            $userAnswer = new UserAnswer();
+            $userAnswer->presentation_id = $slide->presentation_id;
+            $userAnswer->user_id = Auth::id();
+            $userAnswer->play_id = $play->id;
+            $userAnswer->question = $slide->question;
+            $userAnswer->question_type = $slide->question_type;
+            $userAnswer->answer = $answer->answer;
+            $userAnswer->correct = $answer->correct;
+            $userAnswer->save();
+        }
     }
 }

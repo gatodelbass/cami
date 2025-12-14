@@ -14,7 +14,7 @@ class Play extends Model
     
 
     protected $guarded = [];
-    protected $table = 'play';
+    //protected $table = 'plays';
 
     public function presentation()
     {
