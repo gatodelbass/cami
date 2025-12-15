@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('presentation_id')->constrained();
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('play_id')->constrained();
+            $table->foreignId('slide_id')->constrained();
+            $table->integer('play_id');
             $table->string('question');
             $table->string('question_type');
             $table->string('answer');

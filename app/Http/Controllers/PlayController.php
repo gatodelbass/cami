@@ -74,20 +74,17 @@ class PlayController extends Controller
         $play = Play::first();
 
         $previousUserAnswer = UserAnswer::where("presentation_id", $slide->presentation_id)
+            ->where("slide_id", $slide->id)
             ->where("user_id", Auth::id())
             ->where("play_id", $play->id)->first();
 
         if ($previousUserAnswer) {
-
-
-
-            $previousUserAnswer->answer = $answer->answer;
-            $previousUserAnswer->correct = $answer->correct;
-            $previousUserAnswer->save();
+            //ya se guardo la rta
         } else {
             $userAnswer = new UserAnswer();
             $userAnswer->presentation_id = $slide->presentation_id;
             $userAnswer->user_id = Auth::id();
+            $userAnswer->slide_id = $slide->id;
             $userAnswer->play_id = $play->id;
             $userAnswer->question = $slide->question;
             $userAnswer->question_type = $slide->question_type;
