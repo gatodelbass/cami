@@ -115,12 +115,11 @@ class PresentationController extends Controller
                 $query->orderBy('order'); // Order posts by creation date, descending
             }])->first();
 
-        $deletePreviousPlay = Play::first();
-        //dd($deletePreviousPlay);
-        Log::debug("ok");
-        if ($deletePreviousPlay) {
-            Log::debug("borra");
-            $deletePreviousPlay->delete();
+        $previousPlays = Play::all();
+
+        foreach ($previousPlays as $key => $play) {
+            $play->status = "inactivo";
+            $play->save();
         }
 
 
@@ -139,7 +138,7 @@ class PresentationController extends Controller
     public function nextSlide($currentSlideId)
     {
 
-        
+
 
         $currentSlide = Slide::find($currentSlideId);
 
@@ -152,7 +151,7 @@ class PresentationController extends Controller
                 $query->orderBy('order'); // Order posts by creation date, descending
             }])->first();
 
-        $play = Play::first();
+        $play = Play::where("status", "activo")->first();
         $play->presentation_id = $changeSlide->presentation_id;
         $play->slide_id = $changeSlide->id;
         $play->save();
@@ -174,7 +173,7 @@ class PresentationController extends Controller
                 $query->orderBy('order'); // Order posts by creation date, descending
             }])->first();
 
-        $play = Play::first();
+        $play = Play::where("status", "activo")->first();
         $play->presentation_id = $changeSlide->presentation_id;
         $play->slide_id = $changeSlide->id;
         $play->save();

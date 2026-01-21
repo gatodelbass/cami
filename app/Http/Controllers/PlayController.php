@@ -25,7 +25,7 @@ class PlayController extends Controller
     {
 
 
-        $play = Play::first();
+        $play = Play::where("status", "activo")->first();
         $slide = Slide::find($play->slide_id);
 
         $answers = Answer::where("slide_id", $slide->id)->orderBy("order")->get();
@@ -41,7 +41,7 @@ class PlayController extends Controller
 
     public function updatePlaySlide()
     {
-        $play = Play::first();
+        $play = Play::where("status", "activo")->first();
 
         $slide = Slide::find($play->slide_id);
 
@@ -55,7 +55,7 @@ class PlayController extends Controller
 
     public function guestRefresh()
     {
-        $play = Play::first();
+        $play = Play::where("status", "activo")->first();
 
         $slide = Slide::find($play->slide_id);
 
@@ -71,7 +71,7 @@ class PlayController extends Controller
     {
         $answer = Answer::find($answerId);
         $slide = Slide::find($answer->slide_id);
-        $play = Play::first();
+        $play = Play::where("status", "activo")->first();
 
         $previousUserAnswer = UserAnswer::where("presentation_id", $slide->presentation_id)
             ->where("slide_id", $slide->id)
@@ -92,5 +92,18 @@ class PlayController extends Controller
             $userAnswer->correct = $answer->correct;
             $userAnswer->save();
         }
+    }
+
+    public function plays()
+    {
+        $plays = Play::orderBy("created_at", "desc")->get();
+
+
+        return Inertia::render('Play/Index', [
+
+            'plays' => $plays,
+
+
+        ]);
     }
 }

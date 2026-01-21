@@ -28,9 +28,12 @@ Route::post('registerNewUser', [App\Http\Controllers\Auth\RegisteredUserControll
 
 Route::middleware('auth')->group(function () {
 
+    Route::get('plays', [App\Http\Controllers\PlayController::class, 'plays'])->name('plays');
 
-     Route::get('guestRefresh', [App\Http\Controllers\PlayController::class, 'guestRefresh'])->name('guestRefresh');
-  Route::get('guestSaveAnswer/{answerId}', [App\Http\Controllers\PlayController::class, 'guestSaveAnswer'])->name('guestSaveAnswer');
+
+
+    Route::get('guestRefresh', [App\Http\Controllers\PlayController::class, 'guestRefresh'])->name('guestRefresh');
+    Route::get('guestSaveAnswer/{answerId}', [App\Http\Controllers\PlayController::class, 'guestSaveAnswer'])->name('guestSaveAnswer');
 
 
     Route::get('playNow', [App\Http\Controllers\PlayController::class, 'playNow'])->name('playNow');

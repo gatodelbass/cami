@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('presentation_id')->constrained();
             $table->foreignId('slide_id')->constrained();
+             $table->string('status')->default("activo");
             $table->timestamps();
            
         });

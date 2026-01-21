@@ -25,6 +25,11 @@ const mainNavItems: NavItem[] = [
         href: '/playNow',
         icon: LayoutGrid,
     },
+    {
+        title: 'Sesiones',
+        href: '/plays',
+        icon: LayoutGrid,
+    },
 ];
 
 const footerNavItems: NavItem[] = [];
