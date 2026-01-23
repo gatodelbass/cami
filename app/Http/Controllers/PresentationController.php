@@ -121,14 +121,14 @@ class PresentationController extends Controller
 
         $question_types = ["opcion unica", "opcion unica imagen"];
 
-        $slides = Slide::where("presentation_id", $presentation->id)
+        $questionQuantity = Slide::where("presentation_id", $presentation->id)
             ->whereIn('question_type', $question_types)
             ->count();
 
         $play = new Play();
         $play->presentation_id = $presentation->id;
         $play->slide_id = $slide->id;
-        $play->slide_id = $slide->id;
+        $play->questions_quantity = $questionQuantity;
         $play->save();
 
         return Inertia::render('Presentation/Play', [

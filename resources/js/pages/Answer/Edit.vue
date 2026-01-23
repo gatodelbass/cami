@@ -1,11 +1,10 @@
 <template>
     <Head title="Dashboard" />
 
-        <AppLayout>
+    <AppLayout>
         <div class="">
             <div class="p-5">
-                <div class="my-2 text-2xl font-bold">Agregar respuesta</div>
-                {{ form }}
+                <div class="my-2 text-2xl font-bold">Editar respuesta</div>
                 <div class="my-2">
                     <Link :href="route('answers.index')" class="rounded-sm border-2 border-teal-400 bg-teal-300 px-2 py-1"> Volver </Link>
                 </div>
@@ -98,16 +97,15 @@ export default {
             form.slide_id = props.answer.slide_id;
             form.answer = props.answer.answer;
             form.correct = props.answer.correct;
-            
         });
 
         const form = useForm({
             id: null,
             slide_id: props.slide,
             answer: null,
-            correct: null,            
+            correct: null,
             image: null,
-            _method: "PUT",
+            _method: 'PUT',
         });
 
         function update() {

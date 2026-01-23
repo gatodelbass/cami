@@ -4,8 +4,7 @@
     <AppLayout>
         <div class="">
             <div class="p-5">
-                <div class="my-2 text-2xl font-bold">Crear diapositiva</div>
-                {{ form }}
+                <div class="my-2 text-2xl font-bold">Editar diapositiva</div>
                 <div class="my-2">
                     <Link :href="route('slides.index')" class="rounded-sm border-2 border-teal-400 bg-teal-300 px-2 py-1"> Volver </Link>
                 </div>
@@ -72,8 +71,7 @@
                             required
                         >
                             <option value="sin pregunta">sin pregunta</option>
-                            <option value="opcion unica">opcion unica</option>
-                            <option value="opcion multiple">opcion multiple</option>
+                            <option value="opcion unica">opcion unica</option>                           
                             <option value="opcion unica imagen">opcion unica imagen</option>
                         </select>
                     </div>
@@ -87,7 +85,7 @@
                             type="text"
                             id="first_name"
                             class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                            placeholder="Titulo diapositiva"
+                            placeholder="Pregunta diapositiva"
                             required
                         />
                     </div>
@@ -140,7 +138,7 @@ export default {
             question: null,
             question_type: 'opcion_unica',
             file: null,
-            _method: "PUT",
+            _method: 'PUT',
         });
 
         function update() {

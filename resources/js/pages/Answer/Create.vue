@@ -5,7 +5,6 @@
         <div class="">
             <div class="p-5">
                 <div class="my-2 text-2xl font-bold">Agregar respuesta</div>
-                {{ form }}
                 <div class="my-2">
                     <Link :href="route('answers.index')" class="rounded-sm border-2 border-teal-400 bg-teal-300 px-2 py-1"> Volver </Link>
                 </div>

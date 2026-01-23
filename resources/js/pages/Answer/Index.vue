@@ -4,7 +4,7 @@
     <AppLayout>
         <div class="">
             <div class="p-5">
-                <div class="my-2 text-2xl font-bold">Indice de respuestas: {{ slide.question }}</div>
+                <div class="my-2 text-2xl font-bold">Indice de respuestas - Pregunta: {{ slide.question }}</div>
                 <div class="my-2">
                     <InertiaLink :href="route('answers.create', slide)" class="rounded-sm border-2 border-teal-400 bg-teal-300 px-2 py-1">
                         Nueva respuesta
@@ -18,13 +18,12 @@
                 <tbody>
                     <tr>
                         <td class="w-10 px-2">ID</td>
-                        <td class="w-36">Imagen</td>
-                        <td class="w-16">Orden</td>
+                        <td class="w-24">Imagen</td>
+                        <td class="w-10 px-2">Orden</td>
                         <td class="w-44">Correcta</td>
                         <td class="w-96">Respuesta</td>
 
-                        <td class="w-8"></td>
-                        <td class="w-32"></td>
+                        <td class="w-14"></td>
                     </tr>
                 </tbody>
             </table>
@@ -34,12 +33,17 @@
                     <table class="mx-2 my-0.5 border-1 border-gray-400 px-2">
                         <tbody>
                             <tr>
-                                <td class="w-16 px-2">{{ answer.id }}</td>
-                                <td class="w-36">
+                                <td class="w-10 px-2">{{ answer.id }}</td>
+                                {{
+                                    answer.image
+                                }}
+
+                                <td v-if="answer.image" class="w-24">
                                     <img class="inline-block w-24 rounded-sm object-contain" alt="img" :src="'/storage/' + answer.image" />
                                 </td>
+                                <td v-else class="w-24"></td>
 
-                                <td class="w-10">{{ answer.order }}</td>
+                                <td class="w-10 px-2">{{ answer.order }}</td>
                                 <td class="w-44">{{ answer.correct }}</td>
                                 <td class="w-96">{{ answer.answer }}</td>
 
@@ -51,7 +55,6 @@
                                         editar
                                     </inertia-link>
                                 </td>
-                                <td class="w-10 pr-2"></td>
                             </tr>
                         </tbody>
                     </table>
