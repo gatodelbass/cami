@@ -6,12 +6,9 @@
             <div class="p-5">
                 <div class="my-2 text-2xl font-bold">Indice de presentaciones</div>
                 <div class="my-2">
-                     <InertiaLink               
-                :href="route('presentations.create')"
-                class="border-2 border-teal-400 px-2 py-1 bg-teal-300 rounded-sm "
-            >
-                Nueva presentacion
-            </InertiaLink>
+                    <InertiaLink :href="route('presentations.create')" class="rounded-sm border-2 border-teal-400 bg-teal-300 px-2 py-1">
+                        Nueva presentacion
+                    </InertiaLink>
                 </div>
 
                 <table class="w-full text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400">
@@ -25,15 +22,15 @@
                     </thead>
                     <tbody>
                         <tr v-for="presentation in presentations" :key="presentation.id" class="border-1 border-gray-200 bg-white">
-                            <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-gray-900 dark:text-white">
+                            <th scope="row" class="px-6 py-2 font-medium whitespace-nowrap text-gray-900 dark:text-white">
                                 {{ presentation.id }}
                             </th>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-2">
                                 {{ presentation.title }}
                             </td>
-                            <td class="px-6 py-4"></td>
-                            <td class="px-6 py-4">
-                                 <inertia-link
+                            <td class="px-6 py-2"></td>
+                            <td class="px-6 py-2">
+                                <inertia-link
                                     :href="route('getslides', presentation.id)"
                                     class="mx-1 rounded border-1 border-gray-400 bg-gray-200 px-1 py-0"
                                 >
@@ -45,13 +42,12 @@
                                 >
                                     editar
                                 </inertia-link>
-                                 <inertia-link
+                                <inertia-link
                                     :href="route('play', presentation.id)"
                                     class="mx-1 rounded border-1 border-gray-400 bg-gray-200 px-1 py-0"
                                 >
                                     play
                                 </inertia-link>
-
                             </td>
                         </tr>
                     </tbody>

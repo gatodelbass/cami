@@ -103,9 +103,6 @@ class PresentationController extends Controller
 
     public function play($presentationId)
     {
-
-
-
         $presentation = Presentation::find($presentationId);
         $totalSlides = Slide::where("presentation_id", $presentationId)->count();
 
@@ -122,9 +119,15 @@ class PresentationController extends Controller
             $play->save();
         }
 
+        $question_types = ["opcion unica", "opcion unica imagen"];
+
+        $slides = Slide::where("presentation_id", $presentation->id)
+            ->whereIn('question_type', $question_types)
+            ->count();
 
         $play = new Play();
         $play->presentation_id = $presentation->id;
+        $play->slide_id = $slide->id;
         $play->slide_id = $slide->id;
         $play->save();
 

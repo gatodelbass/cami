@@ -101,7 +101,7 @@ class PlayController extends Controller
 
         return Inertia::render('Play/Index', [
 
-            'plays' => $plays,
+            'plays' => $plays->load(["presentation"]),
 
 
         ]);

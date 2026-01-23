@@ -25,11 +25,10 @@
                 </tbody>
             </table>
 
-            <draggable :list="plays" @change="saveplayOrder(state.plays)">
-                <template #item="{ element: play }">
+           
                     <table class="mx-2 my-0.5 border-1 border-gray-400 px-2">
-                        <tbody>
-                            <tr>
+                        <tbody> 
+                            <tr v-for="play in plays" :key="play.id" class="border-b-2">
                                 <td class="w-10 px-2">{{ play.id }}</td>
                                 <td class="w-32">{{ formatDate(play.created_at) }}</td>
                                 <td class="w-32">{{ formatTime(play.created_at) }}</td>
@@ -51,8 +50,7 @@
                             </tr>
                         </tbody>
                     </table>
-                </template>
-            </draggable>
+               
         </div>
     </AppLayout>
 </template>
