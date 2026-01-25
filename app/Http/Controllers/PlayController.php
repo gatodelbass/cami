@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PlayExport;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Presentation;
@@ -17,6 +18,9 @@ use Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class PlayController extends Controller
@@ -96,14 +100,30 @@ class PlayController extends Controller
 
     public function plays()
     {
+       
+
         $plays = Play::orderBy("created_at", "desc")->get();
 
 
         return Inertia::render('Play/Index', [
-
-            'plays' => $plays->load(["presentation"]),
-
-
+            'plays' => $plays,
         ]);
     }
+
+    public function downloadExcel($playId)
+    {
+        $play = Play::find($playId);
+
+        //dd($playId);
+
+
+ if (ob_get_contents()) ob_end_clean(); 
+    
+
+ return (new PlayExport($playId))->download('invoices.xlsx');
+   // return Excel::download(new PlayExport, 'sesion.xlsx');
+
+       
+    }
+    
 }

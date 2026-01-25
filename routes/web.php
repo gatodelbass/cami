@@ -29,6 +29,7 @@ Route::post('registerNewUser', [App\Http\Controllers\Auth\RegisteredUserControll
 Route::middleware('auth')->group(function () {
 
     Route::get('plays', [App\Http\Controllers\PlayController::class, 'plays'])->name('plays');
+     Route::get('downloadExcel/{playId}', [App\Http\Controllers\PlayController::class, 'downloadExcel'])->name('downloadExcel');
 
 
 
