@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\AnswersExport;
 use App\Exports\PlayExport;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -100,7 +101,7 @@ class PlayController extends Controller
 
     public function plays()
     {
-       
+
 
         $plays = Play::orderBy("created_at", "desc")->get();
 
@@ -112,18 +113,12 @@ class PlayController extends Controller
 
     public function downloadExcel($playId)
     {
-        $play = Play::find($playId);
-
-        //dd($playId);
 
 
- if (ob_get_contents()) ob_end_clean(); 
-    
 
- return (new PlayExport($playId))->download('invoices.xlsx');
-   // return Excel::download(new PlayExport, 'sesion.xlsx');
+        if (ob_get_contents()) ob_end_clean();
 
-       
+
+        return (new AnswersExport($playId))->download('respuestas_sesion.xlsx');
     }
-    
 }
