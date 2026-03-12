@@ -23,6 +23,8 @@ class RegisteredUserController extends Controller
 
     public function registerNewUser(Request $request): RedirectResponse
     {
+
+    
         $request->validate([
             'name' => 'required|string|max:255',
             'occupation' => 'required|string|max:255',
@@ -33,7 +35,8 @@ class RegisteredUserController extends Controller
 
         $user = User::create([
             'name' => $request->name,
-            'occupation' => $request->name,
+            'occupation' => $request->occupation,
+            'phone' => $request->occupation,
             'document' => $request->document,
             'email' => $request->email,
             'password' => Hash::make($request->password),
