@@ -29,7 +29,7 @@
                 <br />
 
                 <input v-model="state.imcTexto" type="text" >
-                 <button @click="copyText">Copy Text</button>
+                 <button  @click="copyText" class="border border-teal-400 bg-teal-200 px-1 rounded-sm">copiar texto</button>
               
             </div>
         </div>
