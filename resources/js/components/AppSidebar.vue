@@ -30,6 +30,11 @@ const mainNavItems: NavItem[] = [
         href: '/plays',
         icon: LayoutGrid,
     },
+     {
+        title: 'Calculadora',
+        href: '/calculator',
+        icon: LayoutGrid,
+    },
 ];
 
 const footerNavItems: NavItem[] = [];

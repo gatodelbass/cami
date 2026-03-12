@@ -75,7 +75,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('saveAnswerOrder', [App\Http\Controllers\AnswerController::class, 'saveAnswerOrder'])->name('saveAnswerOrder');
 
-    Route::get('camping', [App\Http\Controllers\PresentationController::class, 'camping'])->name('camping');
+    Route::get('calculator', [App\Http\Controllers\CalculatorController::class, 'index'])->name('calculator');
 });
 
 
