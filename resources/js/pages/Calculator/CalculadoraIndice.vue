@@ -29,7 +29,7 @@
 
                 <input v-model="state.imcTexto" class="w-full" type="text" />
                 <br />
-                <button @click="copyText" class="rounded-sm border border-teal-400 bg-teal-200 px-1">copiar texto</button>
+                <button @click="copyText" class="rounded-sm border border-teal-400 bg-teal-200 px-1">copiar texto</button><span v-if="state.copiarTexto" class="px-1" >copiado</span>
             </div>
         </div>
 
@@ -62,6 +62,7 @@ export default {
             imc: 0,
             imcTexto: '',
             imcClasificacion: '',
+            copiarTexto: false
         });
 
         function calcularIndiceMasaCorporal() {
@@ -97,7 +98,8 @@ export default {
         const copyText = async () => {
             try {
                 await navigator.clipboard.writeText(state.imcTexto);
-                alert('Copied: ' + state.imcTexto);
+                state.copiarTexto = true
+               
             } catch (err) {
                 console.error('Failed to copy: ', err);
             }
