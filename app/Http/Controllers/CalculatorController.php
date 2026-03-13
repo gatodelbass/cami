@@ -25,9 +25,11 @@ class CalculatorController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Calculator/Index', [
-            
-        ]);
+        return Inertia::render('Calculator/Index', []);
     }
 
+    public function calculadoraIndice()
+    {
+        return Inertia::render('Calculator/CalculadoraIndice', []);
+    }
 }

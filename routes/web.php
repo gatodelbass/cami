@@ -76,6 +76,8 @@ Route::middleware('auth')->group(function () {
     Route::post('saveAnswerOrder', [App\Http\Controllers\AnswerController::class, 'saveAnswerOrder'])->name('saveAnswerOrder');
 
     Route::get('calculator', [App\Http\Controllers\CalculatorController::class, 'index'])->name('calculator');
+
+    Route::get('calculadoraIndice', [App\Http\Controllers\CalculatorController::class, 'calculadoraIndice'])->name('calculadoraIndice');
 });
 
 
