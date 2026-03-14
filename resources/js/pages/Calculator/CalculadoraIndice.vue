@@ -122,7 +122,7 @@
                 <button @click="generarTexto()" class="rounded-sm border border-teal-400 bg-teal-200 px-1">generar texto de signos vitales</button>
                 <br />
                 <button @click="copyTextSignosVitales()" class="rounded-sm border border-teal-400 bg-teal-200 px-1">copiar texto</button
-                ><span v-if="state.copiarTexto" class="px-1">copiado</span>
+                ><span v-if="state.copiarTextoSignosVitales" class="px-1">copiado</span>
             </div>
         </div>
     </AppLayout>
