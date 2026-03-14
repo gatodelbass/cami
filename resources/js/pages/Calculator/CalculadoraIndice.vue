@@ -72,8 +72,6 @@
                     class="block w-64 rounded-sm border border-gray-300 bg-gray-50 p-1"
                     required
                 />
-
-                <br />
             </div>
             <div>
                 <span>Ingrese frecuencia respiratoria rpm</span>
@@ -117,7 +115,6 @@
             </div>
             <div>
                 <p>{{ state.textoSignosVitales }}</p>
-                <input v-model="state.textoSignosVitales" class="w-full" type="text" />
                 <br />
                 <button @click="generarTexto()" class="rounded-sm border border-teal-400 bg-teal-200 px-1">generar texto de signos vitales</button>
                 <br />
@@ -217,7 +214,7 @@ export default {
         }
 
         function calcularTension() {
-            state.tensionMedia = (Number(state.tensionDia * 2) + Number(state.tensionSis)) / 3;
+            state.tensionMedia = Math.round((Number(state.tensionDia * 2) + Number(state.tensionSis)) / 3);
 
             if (state.tensionMedia < 65) {
                 state.tensionClasificacion = 'Hipotenso';
