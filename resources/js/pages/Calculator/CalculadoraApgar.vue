@@ -11,7 +11,6 @@
             <span class="mx-1 rounded border border-pink-600 bg-pink-300 px-2 py-1">A veces: 1</span>
             <span class="mx-1 rounded border border-pink-600 bg-pink-400 px-2 py-1">Casi siempre: 2</span>
         </div>
-
         <div class="w-full p-2 text-lg">
             <div>
                 <span>¿Estas satisfecho con la ayuda que recibes de tu familia cuando tienes problemas?</span>
@@ -114,21 +113,13 @@ export default {
         function validarCampoApgar() {
             state.errorValidacion = null;
 
-            if (!Number.isInteger(Number(state.item1)) || state.item1 < 0 || state.item1 > 2 || state.item1 == '') {
-                state.errorValidacion = 'valores invalidos, los valores deben ser 0, 1 o 2 para cada item';
-            }
-
-            if (!Number.isInteger(Number(state.item2)) || state.item2 < 0 || state.item2 > 2 || state.item2 == '') {
-                state.errorValidacion = 'valores invalidos, los valores deben ser 0, 1 o 2 para cada item';
-            }
-
-            if (!Number.isInteger(Number(state.item3)) || state.item3 < 0 || state.item3 > 2 || state.item3 == '') {
-                state.errorValidacion = 'valores invalidos, los valores deben ser 0, 1 o 2 para cada item';
-            }
-            if (!Number.isInteger(Number(state.item4)) || state.item4 < 0 || state.item4 > 2 || state.item4 == '') {
-                state.errorValidacion = 'valores invalidos, los valores deben ser 0, 1 o 2 para cada item';
-            }
-            if (!Number.isInteger(Number(state.item5)) || state.item5 < 0 || state.item5 > 2 || state.item5 == '') {
+            if (
+                !/^[0-2]$/.test(state.item1) ||
+                !/^[0-2]$/.test(state.item2) ||
+                !/^[0-2]$/.test(state.item3) ||
+                !/^[0-2]$/.test(state.item4) ||
+                !/^[0-2]$/.test(state.item5)
+            ) {
                 state.errorValidacion = 'valores invalidos, los valores deben ser 0, 1 o 2 para cada item';
             }
         }
