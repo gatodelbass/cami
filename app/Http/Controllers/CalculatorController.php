@@ -32,4 +32,9 @@ class CalculatorController extends Controller
     {
         return Inertia::render('Calculator/CalculadoraIndice', []);
     }
+
+     public function calculadoraApgar()
+    {
+        return Inertia::render('Calculator/CalculadoraApgar', []);
+    }
 }

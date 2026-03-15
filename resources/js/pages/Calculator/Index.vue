@@ -6,9 +6,12 @@
             </div>
         </div>
 
-        <div class="w-full p-2 text-sm">
+        <div class="w-full p-2 ">
             <inertia-link :href="route('calculadoraIndice')" class="mx-1 rounded border-1 border-gray-400 bg-gray-200 px-1 py-0">
                 Indice masa corporal
+            </inertia-link>
+             <inertia-link :href="route('calculadoraApgar')" class="mx-1 rounded border-1 border-gray-400 bg-gray-200 px-1 py-0">
+                Apgar familiar
             </inertia-link>
         </div>
 

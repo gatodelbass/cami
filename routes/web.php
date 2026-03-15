@@ -78,6 +78,9 @@ Route::middleware('auth')->group(function () {
     Route::get('calculator', [App\Http\Controllers\CalculatorController::class, 'index'])->name('calculator');
 
     Route::get('calculadoraIndice', [App\Http\Controllers\CalculatorController::class, 'calculadoraIndice'])->name('calculadoraIndice');
+    Route::get('calculadoraApgar', [App\Http\Controllers\CalculatorController::class, 'calculadoraApgar'])->name('calculadoraApgar');
+
+
 });
 
 
