@@ -63,6 +63,7 @@
                     required
                 />
             </div>
+            <!--
             <div>
                 <span>Ingrese frecuencia cardiaca en lpm</span>
                 <input
@@ -113,6 +114,7 @@
                     <option value="No">No</option>
                 </select>
             </div>
+            -->
             <div>
                 <p>{{ state.textoSignosVitales }}</p>
                 <br />
@@ -145,8 +147,8 @@ export default {
         onMounted(() => {});
 
         const state = reactive({
-            peso: 70,
-            altura: 160,
+            peso: null,
+            altura: null,
             imc: 0,
             imcTexto: '',
             imcClasificacion: '',
@@ -216,17 +218,45 @@ export default {
         function calcularTension() {
             state.tensionMedia = Math.round((Number(state.tensionDia * 2) + Number(state.tensionSis)) / 3);
 
-            if (state.tensionMedia < 65) {
-                state.tensionClasificacion = 'Hipotenso';
+            // if (state.tensionMedia < 65) {
+            //     state.tensionClasificacion = 'Hipotenso';
+            // }
+
+            // if (state.tensionMedia >= 66 && state.tensionMedia <= 100) {
+            //     state.tensionClasificacion = 'Normotenso';
+            // }
+
+            // if (state.tensionMedia > 100) {
+            //     state.tensionClasificacion = 'Hipertenso';
+            // }
+
+            if(state.tensionSis < 120 && state.tensionDia < 80){
+                state.tensionClasificacion = "Normal";
+
+            }
+             if(state.tensionSis >= 120 && state.tensionSis <= 129 && state.tensionDia < 80){
+                state.tensionClasificacion = "Elevada";
+
             }
 
-            if (state.tensionMedia >= 66 && state.tensionMedia <= 100) {
-                state.tensionClasificacion = 'Normotenso';
+             if((state.tensionSis >= 130 && state.tensionSis <= 139) || (state.tensionDia >= 80 && state.tensionDia <= 89)){
+                state.tensionClasificacion = "Hipertensión Etapa I";
+
             }
 
-            if (state.tensionMedia > 100) {
-                state.tensionClasificacion = 'Hipertenso';
+              if((state.tensionSis >= 140 && state.tensionSis <= 179) || (state.tensionDia >= 90 && state.tensionDia <= 119)){
+                state.tensionClasificacion = "Hipertensión Etapa II";
+
             }
+
+
+              if((state.tensionSis >= 180) || (state.tensionDia >= 120 )){
+                state.tensionClasificacion = "Hipertensión Grave";
+
+            }
+
+
+
         }
 
         function calcularRespiratoria() {
@@ -287,20 +317,24 @@ export default {
                 ' mmHg, ' +
                 state.tensionClasificacion;
 
-            let lpm = 'Frecuencia cardíaca: ' + state.lpm + ' ' + state.lpmClasificacion;
+             let lpm = 'Frecuencia cardíaca: ' + state.lpm + ' ' + state.lpmClasificacion;
 
-            let frecuenciaRespiratoria =
-                'Frecuencia respiratoria: ' + state.frecuenciaRespiratoria + ' rpm, ' + state.frecuenciaRespiratoriaClasificacion;
+            // let frecuenciaRespiratoria =
+            //     'Frecuencia respiratoria: ' + state.frecuenciaRespiratoria + ' rpm, ' + state.frecuenciaRespiratoriaClasificacion;
 
-            let saturacionOxigeno = 'Saturación de oxígeno: ' + state.saturacionOxigeno + ' %, ' + state.saturacionOxigenoClasificacion;
+            // let saturacionOxigeno = 'Saturación de oxígeno: ' + state.saturacionOxigeno + ' %, ' + state.saturacionOxigenoClasificacion;
 
-            let conOxigeno = 'Con oxígeno: ' + state.conOxigeno;
+            // let conOxigeno = 'Con oxígeno: ' + state.conOxigeno;
 
-            let temperatura = 'Temperatura: ' + state.temperatura + ' °C, ' + state.temperaturaClasificacion;
+            // let temperatura = 'Temperatura: ' + state.temperatura + ' °C, ' + state.temperaturaClasificacion;
 
-            state.textoSignosVitales =
-                tension + ' - ' + lpm + ' - ' + frecuenciaRespiratoria + ' - ' + saturacionOxigeno + ' - ' + conOxigeno + ' - ' + temperatura;
-        }
+        //     state.textoSignosVitales =
+        //         tension + ' - ' + lpm + ' - ' + frecuenciaRespiratoria + ' - ' + saturacionOxigeno + ' - ' + conOxigeno + ' - ' + temperatura;
+        // 
+        
+    state.textoSignosVitales =  tension; 
+    
+    }
 
         const copyText = async () => {
             try {

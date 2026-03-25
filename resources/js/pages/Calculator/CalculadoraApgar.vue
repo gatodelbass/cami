@@ -11,57 +11,96 @@
             <span class="mx-1 rounded border border-pink-600 bg-pink-300 px-2 py-1">A veces: 1</span>
             <span class="mx-1 rounded border border-pink-600 bg-pink-400 px-2 py-1">Casi siempre: 2</span>
         </div>
+
+        <div>
+            <div></div>
+        </div>
+
         <div class="w-full p-2 text-lg">
             <div>
                 <span>¿Estas satisfecho con la ayuda que recibes de tu familia cuando tienes problemas?</span>
-                <input
-                    v-model="state.item1"
-                    v-on:keyup="validarCampoApgar()"
-                    type="text"
-                    class="block w-64 rounded-sm border border-gray-300 bg-gray-50 p-1"
-                    required
-                />
+                <br />
+                <label>
+                    <input type="radio" v-model="state.item1" value="0" />
+                    Casi nunca
+                </label>
+                <label>
+                    <input type="radio" v-model="state.item1" value="1" />
+                    A veces
+                </label>
+                <label>
+                    <input type="radio" v-model="state.item1" value="2" />
+                    Casi siempre
+                </label>
             </div>
+            <br />
             <div>
                 <span>¿Conversan entre ustedes los problemas que tienen en la casa?</span>
-                <input
-                    v-model="state.item2"
-                    v-on:keyup="validarCampoApgar()"
-                    type="text"
-                    class="block w-64 rounded-sm border border-gray-300 bg-gray-50 p-1"
-                    required
-                />
+
+                <br />
+                <label>
+                    <input type="radio" v-model="state.item2" value="0" />
+                    Casi nunca
+                </label>
+                <label>
+                    <input type="radio" v-model="state.item2" value="1" />
+                    A veces
+                </label>
+                <label>
+                    <input type="radio" v-model="state.item2" value="2" />
+                    Casi siempre
+                </label>
             </div>
+            <br />
             <div>
                 <span>¿Las decisiones importantes se toman en conjunto en la familia?</span>
-                <input
-                    v-model="state.item3"
-                    v-on:keyup="validarCampoApgar()"
-                    type="text"
-                    class="block w-64 rounded-sm border border-gray-300 bg-gray-50 p-1"
-                    required
-                />
+                <br />
+                <label>
+                    <input type="radio" v-model="state.item3" value="0" />
+                    Casi nunca
+                </label>
+                <label>
+                    <input type="radio" v-model="state.item3" value="1" />
+                    A veces
+                </label>
+                <label>
+                    <input type="radio" v-model="state.item3" value="2" />
+                    Casi siempre
+                </label>
             </div>
+            <br />
             <div>
                 <span>Los fines de semana son compartidos por todos en la casa?</span>
-                <input
-                    v-model="state.item4"
-                    v-on:keyup="validarCampoApgar()"
-                    type="text"
-                    class="block w-64 rounded-sm border border-gray-300 bg-gray-50 p-1"
-                    required
-                />
+                <br />
+                <label>
+                    <input type="radio" v-model="state.item4" value="0" />
+                    Casi nunca
+                </label>
+                <label>
+                    <input type="radio" v-model="state.item4" value="1" />
+                    A veces
+                </label>
+                <label>
+                    <input type="radio" v-model="state.item4" value="2" />
+                    Casi siempre
+                </label>
             </div>
-
+            <br />
             <div>
                 <span>¿Sientes que tu familia te quiere?</span>
-                <input
-                    v-model="state.item5"
-                    v-on:keyup="validarCampoApgar()"
-                    type="text"
-                    class="block w-64 rounded-sm border border-gray-300 bg-gray-50 p-1"
-                    required
-                />
+                <br />
+                <label>
+                    <input type="radio" v-model="state.item5" value="0" />
+                    Casi nunca
+                </label>
+                <label>
+                    <input type="radio" v-model="state.item5" value="1" />
+                    A veces
+                </label>
+                <label>
+                    <input type="radio" v-model="state.item5" value="2" />
+                    Casi siempre
+                </label>
             </div>
 
             <div>
@@ -98,6 +137,8 @@ export default {
         onMounted(() => {});
 
         const state = reactive({
+            selectedOption: 0,
+
             item1: 0,
             item2: 0,
             item3: 0,
@@ -165,7 +206,7 @@ export default {
                 state.clasificacionApgar = 'Alta funcionalidad';
             }
 
-            state.textoApgar = 'APGAR FAMILIAR, con puntaje total de ' + state.sumatoriaApgar + ' y clasificación con ' + state.clasificacionApgar;
+            state.textoApgar = 'APGAR FAMILIAR: ' + state.sumatoriaApgar + ' y clasificación con ' + state.clasificacionApgar;
         }
 
         const copyTextApgar = async () => {
