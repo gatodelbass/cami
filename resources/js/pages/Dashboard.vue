@@ -27,7 +27,10 @@ const breadcrumbs: BreadcrumbItem[] = [
                 Indice masa corporal
             </inertia-link>
              <inertia-link :href="route('calculadoraApgar')" class="mx-1 rounded border-1 border-gray-400 bg-gray-200 px-1 py-0">
-                Apgar familiar
+                Apgar
+            </inertia-link>
+             <inertia-link :href="route('calculadoraZarit')" class="mx-1 rounded border-1 border-gray-400 bg-gray-200 px-1 py-0">
+                Zarit
             </inertia-link>
         </div>
                 </div>

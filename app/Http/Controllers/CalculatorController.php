@@ -37,4 +37,9 @@ class CalculatorController extends Controller
     {
         return Inertia::render('Calculator/CalculadoraApgar', []);
     }
+
+      public function calculadoraZarit()
+    {
+        return Inertia::render('Calculator/CalculadoraZarit', []);
+    }
 }
