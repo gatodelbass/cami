@@ -26,9 +26,11 @@ const breadcrumbs: BreadcrumbItem[] = [
             <inertia-link :href="route('calculadoraIndice')" class="mx-1 rounded border-1 border-gray-400 bg-gray-200 px-1 py-0">
                 Indice masa corporal
             </inertia-link>
+            <br><br>
              <inertia-link :href="route('calculadoraApgar')" class="mx-1 rounded border-1 border-gray-400 bg-gray-200 px-1 py-0">
                 Apgar
             </inertia-link>
+            <br><br>
              <inertia-link :href="route('calculadoraZarit')" class="mx-1 rounded border-1 border-gray-400 bg-gray-200 px-1 py-0">
                 Zarit
             </inertia-link>

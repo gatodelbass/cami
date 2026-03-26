@@ -7,7 +7,7 @@
         </div>
 
         <div class="w-full p-2 text-lg">
-            <div>
+            <div class="p-1 bg-teal-50 border border-teal-200">
                 <span>¿Piensa que debido al tiempo que dedica a su familiar no tiene suficiente tiempo para usted?</span>
                 <br />
 
@@ -33,7 +33,7 @@
                 </label>
             </div>
             <br />
-            <div>
+             <div class="p-1 bg-teal-50 border border-teal-200">
                 <span
                     >¿Se siente agobiado por intentar compatibilizar el cuidado de su familiar con otras responsabilidades (como trabajo,
                     familia)?</span
@@ -63,7 +63,7 @@
             </div>
 
             <br />
-            <div>
+             <div class="p-1 bg-teal-50 border border-teal-200">
                 <span>¿Piensa que el cuidar a su familiar afecta negativamente la relación que usted tiene con otros miembros de su familia?</span>
                 <br />
 
@@ -90,7 +90,7 @@
             </div>
 
             <br />
-            <div>
+            <div class="p-1 bg-teal-50 border border-teal-200">
                 <span>¿Piensa que su salud ha empeorado debido a tener que cuidar a su familiar?</span>
                 <br />
 
@@ -117,7 +117,7 @@
             </div>
 
             <br />
-            <div>
+           <div class="p-1 bg-teal-50 border border-teal-200">
                 <span>¿Se siente tenso cuando esta cerca de su familiar?</span>
                 <br />
 
@@ -144,7 +144,7 @@
             </div>
 
             <br />
-            <div>
+           <div class="p-1 bg-teal-50 border border-teal-200">
                 <span>¿Siente que ha perdido el control de su vida desde que comenzó la enfermedad de su familiar?</span>
                 <br />
 
@@ -171,7 +171,7 @@
             </div>
 
             <br />
-            <div>
+            <div class="p-1 bg-teal-50 border border-teal-200">
                 <span>Globalmente ¿Que grado de carga experimenta por el hecho de cuidar a su familiar?</span>
                 <br />
 
