@@ -123,6 +123,21 @@
                 <button @click="copyTextSignosVitales()" class="rounded-sm border border-teal-400 bg-teal-200 px-1">copiar texto</button
                 ><span v-if="state.copiarTextoSignosVitales" class="px-1">copiado</span>
             </div>
+            <br />
+            <div>
+                calcular edad
+                <div>
+                    <span>dia</span>
+                    <input v-model="state.dia" type="text" class="mx-1 w-12 rounded-sm border border-gray-300 bg-gray-50 p-1" required />
+                    <span>mes</span>
+                    <input v-model="state.mes" type="text" class="mx-1 w-12 rounded-sm border border-gray-300 bg-gray-50 p-1" required />
+                    <span>año</span>
+                    <input v-model="state.anio" type="text" class="mx-1 w-16 rounded-sm border border-gray-300 bg-gray-50 p-1" required />
+                    <br />
+                    <button @click="calcularEdad()" class="mt-1 rounded-sm border border-teal-400 bg-teal-200 px-1">calcular edad</button>
+                    <span class="mx-2">La edad es: {{ state.edad }}</span>
+                </div>
+            </div>
         </div>
     </AppLayout>
 </template>
@@ -169,6 +184,10 @@ export default {
             textoSignosVitales: '',
             copiarTexto: false,
             copiarTextoSignosVitales: false,
+            dia: null,
+            mes: null,
+            anio: 1900,
+            edad: null,
         });
 
         function calcularIndiceMasaCorporal() {
@@ -230,33 +249,24 @@ export default {
             //     state.tensionClasificacion = 'Hipertenso';
             // }
 
-            if(state.tensionSis < 120 && state.tensionDia < 80){
-                state.tensionClasificacion = "Normal";
-
+            if (state.tensionSis < 120 && state.tensionDia < 80) {
+                state.tensionClasificacion = 'Normal';
             }
-             if(state.tensionSis >= 120 && state.tensionSis <= 129 && state.tensionDia < 80){
-                state.tensionClasificacion = "Elevada";
-
+            if (state.tensionSis >= 120 && state.tensionSis <= 129 && state.tensionDia < 80) {
+                state.tensionClasificacion = 'Elevada';
             }
 
-             if((state.tensionSis >= 130 && state.tensionSis <= 139) || (state.tensionDia >= 80 && state.tensionDia <= 89)){
-                state.tensionClasificacion = "Hipertensión Etapa I";
-
+            if ((state.tensionSis >= 130 && state.tensionSis <= 139) || (state.tensionDia >= 80 && state.tensionDia <= 89)) {
+                state.tensionClasificacion = 'Hipertensión Etapa I';
             }
 
-              if((state.tensionSis >= 140 && state.tensionSis <= 179) || (state.tensionDia >= 90 && state.tensionDia <= 119)){
-                state.tensionClasificacion = "Hipertensión Etapa II";
-
+            if ((state.tensionSis >= 140 && state.tensionSis <= 179) || (state.tensionDia >= 90 && state.tensionDia <= 119)) {
+                state.tensionClasificacion = 'Hipertensión Etapa II';
             }
 
-
-              if((state.tensionSis >= 180) || (state.tensionDia >= 120 )){
-                state.tensionClasificacion = "Hipertensión Grave";
-
+            if (state.tensionSis >= 180 || state.tensionDia >= 120) {
+                state.tensionClasificacion = 'Hipertensión Grave';
             }
-
-
-
         }
 
         function calcularRespiratoria() {
@@ -317,7 +327,7 @@ export default {
                 ' mmHg, ' +
                 state.tensionClasificacion;
 
-             let lpm = 'Frecuencia cardíaca: ' + state.lpm + ' ' + state.lpmClasificacion;
+            let lpm = 'Frecuencia cardíaca: ' + state.lpm + ' ' + state.lpmClasificacion;
 
             // let frecuenciaRespiratoria =
             //     'Frecuencia respiratoria: ' + state.frecuenciaRespiratoria + ' rpm, ' + state.frecuenciaRespiratoriaClasificacion;
@@ -328,13 +338,12 @@ export default {
 
             // let temperatura = 'Temperatura: ' + state.temperatura + ' °C, ' + state.temperaturaClasificacion;
 
-        //     state.textoSignosVitales =
-        //         tension + ' - ' + lpm + ' - ' + frecuenciaRespiratoria + ' - ' + saturacionOxigeno + ' - ' + conOxigeno + ' - ' + temperatura;
-        // 
-        
-    state.textoSignosVitales =  tension; 
-    
-    }
+            //     state.textoSignosVitales =
+            //         tension + ' - ' + lpm + ' - ' + frecuenciaRespiratoria + ' - ' + saturacionOxigeno + ' - ' + conOxigeno + ' - ' + temperatura;
+            //
+
+            state.textoSignosVitales = tension;
+        }
 
         const copyText = async () => {
             try {
@@ -354,6 +363,20 @@ export default {
             }
         };
 
+        function calcularEdad() {
+            let today = new Date();
+            const dateString = state.anio + '-' + state.mes + '-' + state.dia;
+            const birthDate = new Date(dateString);
+
+            let age = today.getFullYear() - birthDate.getFullYear();
+            let m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+
+            state.edad = age;
+        }
+
         return {
             state,
             calcularIndiceMasaCorporal,
@@ -365,6 +388,7 @@ export default {
             calcularSaturacionOxigeno,
             generarTexto,
             copyText,
+            calcularEdad,
         };
     },
 };
