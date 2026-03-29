@@ -368,13 +368,33 @@ export default {
             const dateString = state.anio + '-' + state.mes + '-' + state.dia;
             const birthDate = new Date(dateString);
 
-            let age = today.getFullYear() - birthDate.getFullYear();
-            let m = today.getMonth() - birthDate.getMonth();
-            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-                age--;
-            }
+            today.setHours(0, 0, 0, 0);
+  birthDate.setHours(0, 0, 0, 0);
 
-            state.edad = age;
+             let years = today.getFullYear() - birthDate.getFullYear();
+  let months = today.getMonth() - birthDate.getMonth();
+  let days = today.getDate() - birthDate.getDate();
+
+  if (days < 0) {
+    // Get the number of days in the previous month
+    const daysInLastMonth = new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+    days += daysInLastMonth;
+    months--;
+  }
+
+  if (months < 0) {
+    months += 12;
+    years--;
+  }
+
+
+            //let age = today.getFullYear() - birthDate.getFullYear();
+            //let m = today.getMonth() - birthDate.getMonth();
+            //if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            //    age--;
+            //}
+
+            state.edad = " " + years + " años, " + months + " meses y " + days + " dias";
         }
 
         return {
